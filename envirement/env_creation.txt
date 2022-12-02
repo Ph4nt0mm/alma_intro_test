@@ -1,0 +1,18 @@
+From https://stackoverflow.com/questions/70851048/does-it-make-sense-to-use-conda-poetry
+______________________________________________________________________________________
+
+conda create -p ./tmp/alma_intro_test -c conda-forge mamba conda-lock poetry='1.1.15'
+conda activate ./tmp/alma_intro_test
+
+conda-lock -k explicit --conda mamba
+mn ./conda* ./envirement/
+
+poetry init --python=~3.9
+poetry add --lock pandas
+
+conda deactivate
+rm -rf ./tmp/alma_intro_test
+
+conda create --prefix ./envirement/alma_intro_test --file ./envirement/conda-osx-64.lock
+conda activate ./envirement/alma_intro_test
+poetry install
